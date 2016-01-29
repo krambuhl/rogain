@@ -1,0 +1,19 @@
+<div class="l-template">
+  <Heading tagName="h1">Archive</Heading>
+
+  <Gate key={articles}>
+    <NonEmpty>
+      <Repeat key={articles}>
+        <article key={@data.title|slug}>
+          <Heading tagName="h2">{@data.title|titleCase}</Heading>
+          <p>{@data.contents}</p>
+          <a href="{@data.href}">read more</a>
+        </article>
+      </Repeat>
+    </NonEmpty>
+
+    <Empty>
+      <Heading tagName="h2">No Articles</Heading>
+    </Empty>
+  </Gate>
+</div>

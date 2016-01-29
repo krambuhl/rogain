@@ -1,0 +1,7 @@
+<Repeat key="{articles}">
+  <article key={@data.title|slug}>
+    <Heading tagName="h2">{@data.title|titleCase}</Heading>
+    <p>{@data.contents} plus {link}</p>
+    <a href="{@data.href}">read more</a>
+  </article>
+</Repeat>
