@@ -1,7 +1,17 @@
-<Repeat key="{articles}">
-  <article key={@data.title|slug}>
-    <Heading tagName="h2">{@data.title|titleCase}</Heading>
-    <p>{@data.contents} plus {link}</p>
-    <a href="{@data.href}">read more</a>
+<Repeat key="articles">
+  <article data-key={@index}>
+    <Range key="@index" min="1" max="3">
+      <Heading tagName="h2">{@data.title}</Heading>
+      <p>{@data.contents}</p>
+      <a href="{@data.href}">read more</a>
+    </Range>
+
+    <Pass key="@index" value="1">
+      <Heading tagName="h2">Only on #2!</Heading>
+    </Pass>
+
+    <Pass key="@index" value="0">
+      <div>Pass</div>
+    </Pass>
   </article>
 </Repeat>
