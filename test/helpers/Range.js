@@ -14,5 +14,5 @@ module.exports = function(attrs, children, props) {
     if (data <= max) passing = true;
   }
 
-  return passing ? children : undefined;
+  if (passing) return children;
 };

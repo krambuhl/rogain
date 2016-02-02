@@ -1,12 +1,13 @@
 <Repeat key="articles">
-  <article data-key={@index}>
+  <article data-key={@index} data-parent-key={@attrs.key}>
     <Range key="@index" min="1" max="3">
-      <Heading tagName="h2">{@data.title}</Heading>
+      <Heading tagName="h2">tagName: {@attrs.tagName} - {@data.title}</Heading>
       <p>{@data.contents}</p>
       <a href="{@data.href}">read more</a>
     </Range>
 
     <Pass key="@index" value="1">
+      <div>{@attrs.key} - {@attrs.value}</div>
       <Heading tagName="h2">Only on #2!</Heading>
     </Pass>
 

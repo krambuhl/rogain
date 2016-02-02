@@ -3,6 +3,8 @@ const Rogain = require('../dist').default;
 const createDefaultParser = require('../dist').createDefaultParser;
 const renderToString = require('../dist').renderToString;
 
+const html = require('html').prettyPrint;
+
 const inst = new Rogain({
   helpers: {
     Range: require('./helpers/Range'),
@@ -13,7 +15,7 @@ const inst = new Rogain({
 });
 
 var parser = createDefaultParser(function(tree) {
-  console.log(renderToString(tree, {
+  console.log(html(renderToString(tree, {
     'articles': [{
       title: 'bread',
       contents: 'Lorem ipsum Incididunt cupidatat laborum.',
@@ -31,7 +33,7 @@ var parser = createDefaultParser(function(tree) {
       contents: 'Krommally bizol boot red hat strollen bruchwise',
       href: '#/moooore'
     }]
-  }, inst));
+  }, inst)));
 }, { rogainInstance: inst });
 
 fs.readFile(__dirname + '/fixtures/template.html', function(err, template) {
