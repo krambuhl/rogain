@@ -1,0 +1,143 @@
+{
+  "type": "helper",
+  "name": "Repeat",
+  "attrs": [{
+    "name": "key",
+    "value": "articles"
+  }],
+  "children": [{
+    "type": "tag",
+    "tagName": "article",
+    "attrs": [{
+      "name": "data-key",
+      "data": [{
+        "type": "variable",
+        "path": "@index"
+      }]
+    }, {
+      "name": "data-parent-key",
+      "data": [{
+        "type": "variable",
+        "path": "@attrs.key"
+      }]
+    }],
+    "children": [{
+      "type": "helper",
+      "name": "Range",
+      "attrs": [{
+        "name": "key",
+        "value": "@index"
+      }, {
+        "name": "min",
+        "value": "1"
+      }, {
+        "name": "max",
+        "value": "3"
+      }],
+      "children": [{
+        "type": "component",
+        "name": "Heading",
+        "attrs": [{
+          "name": "tagName",
+          "value": "h2"
+        }],
+        "children": [{
+          "type": "textnode",
+          "data": [{
+            "type": "text",
+            "value": "tagName: "
+          }, {
+            "type": "variable",
+            "path": "@attrs.tagName"
+          }, {
+            "type": "text",
+            "value": " - "
+          }, {
+            "type": "variable",
+            "path": "@attrs.max"
+          }]
+        }]
+      }, {
+        "type": "tag",
+        "tagName": "p",
+        "children": [{
+          "type": "textnode",
+          "data": [{
+            "type": "variable",
+            "path": "@data.contents"
+          }]
+        }]
+      }, {
+        "type": "tag",
+        "tagName": "a",
+        "attrs": [{
+          "name": "href",
+          "data": [{
+            "type": "variable",
+            "path": "@data.href"
+          }]
+        }],
+        "children": [{
+          "type": "textnode",
+          "value": "read more"
+        }]
+      }]
+    }, {
+      "type": "helper",
+      "name": "Pass",
+      "attrs": [{
+        "name": "key",
+        "value": "@index"
+      }, {
+        "name": "value",
+        "value": "1"
+      }],
+      "children": [{
+        "type": "tag",
+        "tagName": "div",
+        "children": [{
+          "type": "textnode",
+          "data": [{
+            "type": "variable",
+            "path": "@attrs.key"
+          }, {
+            "type": "text",
+            "value": " - "
+          }, {
+            "type": "variable",
+            "path": "@attrs.value"
+          }]
+        }]
+      }, {
+        "type": "component",
+        "name": "Heading",
+        "attrs": [{
+          "name": "tagName",
+          "value": "h2"
+        }],
+        "children": [{
+          "type": "textnode",
+          "value": "Only on #2!"
+        }]
+      }]
+    }, {
+      "type": "helper",
+      "name": "Pass",
+      "attrs": [{
+        "name": "key",
+        "value": "@index"
+      }, {
+        "name": "value",
+        "value": "0"
+      }],
+      "children": [{
+        "type": "tag",
+        "tagName": "div",
+        "children": [{
+          "type": "textnode",
+          "value": "Pass"
+        }]
+      }]
+    }]
+  }]
+}

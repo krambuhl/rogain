@@ -1,7 +1,7 @@
 <Repeat key="articles">
   <article data-key={@index} data-parent-key={@attrs.key}>
     <Range key="@index" min="1" max="3">
-      <Heading tagName="h2">tagName: {@attrs.tagName} - {@data.title}</Heading>
+      <Heading tagName="h2">tagName: {@attrs.tagName} - {@attrs.max}</Heading>
       <p>{@data.contents}</p>
       <a href="{@data.href}">read more</a>
     </Range>

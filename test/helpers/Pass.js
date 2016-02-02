@@ -1,4 +1,4 @@
-var getVariable = require('../../dist').getVariable;
+var getVar = require('../../dist').getVar;
 module.exports = function(attrs, children, props) {
-  if (getVariable(props, attrs.key) === attrs.value) return children;
+  if (getVar(props, attrs.key) === attrs.value) return children;
 };
