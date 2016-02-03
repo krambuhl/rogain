@@ -1,9 +1,10 @@
-var getVar = require('../../dist').getVar;
+var splitTree = require('../../dist').splitTree;
 
-module.exports = function(attrs, children, props) {
-  var data = parseInt(getVar(props, attrs.key), 10);
-  var min = parseInt(attrs.min, 10);
-  var max = parseInt(attrs.max, 10);
+module.exports = function(tree, props) {
+  var split = splitTree(tree.children, 'component', 'Else');
+  var data = parseInt(tree.data, 10);
+  var min = parseInt(tree.attrs.min, 10);
+  var max = parseInt(tree.attrs.max, 10);
   var passing = false;
 
   if (!isNaN(min) && !isNaN(max)) {
@@ -14,5 +15,6 @@ module.exports = function(attrs, children, props) {
     if (data <= max) passing = true;
   }
 
-  if (passing) return children;
+  if (passing) return split[0];
+  return split[1];
 };

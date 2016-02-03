@@ -2,6 +2,7 @@
 
 Rogain is a templating library that parses HTML-like templates into JSON compatible trees and provides tools for rendering on the server and browser.
 
+
 ## Templates
 
 Rogain provides a templating language that uses case-sensitive HTML and single curly brackets, block helpers and component composition.
@@ -10,60 +11,28 @@ Rogain provides a templating language that uses case-sensitive HTML and single c
 <div>
   <Heading tagName="h1">{title}</Heading>
   <Repeat data={favoriteThings}>
-    <Heading tagName="h2">{@data.title}</Heading>
-    <p>{@data.contents}</p>
+    <Heading tagName="h2">{@loop.title}</Heading>
+    <p>{@loop.contents}</p>
   </Repeat>
 </div>
 ```
 
+
 ## Rogain.Config
 
 ```js
-var config = new Rogain.Config();
-```
-
-### registerHelper(name, fn)
-
-```js
-config.registerHelper('Repeat', function(attrs, tree, props) {
-  var locals = Rogain.createDefaultLocals(props, attrs);
-
-  return attrs.data.map((data, i) => {
-    return createFrame(tree, Object.assign({}, locals, { 
-      '@data': data, 
-      '@index': i 
-    }));
-  });
+var config = new Rogain.Config({
+    helpers: {
+        Pass: require('./helpers/pass')
+    },
+    components: {
+        Heading: require('./components/heading.json')
+    }
 });
 ```
 
-### unregisterHelper(name)
+Further documentation on the Config class can be found in the [Config Readme](README.config.md)
 
-```js
-config.unregisterHelper('Repeat');
-```
-
-### registerComponent(name, tree)
-
-```js
-var HeadingTree = {
-  type: 'tag',
-  tagName: 'h3',
-  attrs: [{ name: 'class', value: 'heading' }]
-  data: [{
-    type: 'variable',
-    path: '@children'
-  }]
-}
-
-config.registerComponent('Heading', HeadingTree);
-```
-
-### unregisterComponent(name)
-
-```js
-config.unregisterComponent('Heading');
-```
 
 ## Rogain.Parser
 
@@ -74,17 +43,21 @@ var parser = new Rogain.Parser(config.helpers);
 ### parse(template)
 
 ```js
-fs.readFile(__dirname + '/fixtures/template.html')
+fs.readFile(__dirname + '/components/template.html')
   .then(template => parser.parse(template))
-  .then(tree => fs.writeFile('./fixtures/template.json', tree));
+  .then(tree => {
+    var output = JSON.stringify(tree)
+    return fs.writeFile(__dirname + '/components/template.json', output);
+  });
 ```
+
 
 ## Rendering
 
 ### Rogain.renderToString(tree, data, config)
 
 ```js
-var tree = require('./fixtures/template.json');
+var tree = require('./components/template.json');
 var data = require('./fixtures/data.json');
 
 document.body.innerHTML = renderToString(tree, data, config);
@@ -99,12 +72,21 @@ document.body.innerHTML = renderToString(tree, data, config);
 var locals = createDefaultLocals(props, attrs);
 ```
 
-
 ### createFrame(tree, locals)
 
 ```js
 var frame = createFrame(rtree, locals);
 ```
 
-### getVar(obj, path)
+
+## Tree Utilities
+
+### splitTree(trees, type, name)
+
+```js
+var branches = splitTree(tree.children, 'component', 'Else');
+var passBranch = branches[0];
+var failBranch = branches[1];
+```
+
 

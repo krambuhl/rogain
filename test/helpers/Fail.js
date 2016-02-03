@@ -1,4 +1,7 @@
-var getVar = require('../../dist').getVar;
-module.exports = function(attrs, children, props) {
-  if (getVar(props, attrs.key) !== attrs.value) return children;
+var splitTree = require('../../dist').splitTree;
+
+module.exports = function(tree, props) {
+  var split = splitTree(tree.children, 'component', 'Else');
+  if (tree.data !== tree.value) return split[0];
+  return split[1];
 };

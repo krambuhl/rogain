@@ -1,0 +1,340 @@
+{
+  "Heading": {
+    "type": "tag",
+    "tagName": "h3",
+    "attrs": [
+      {
+        "name": "class",
+        "value": "heading"
+      }
+    ],
+    "children": [
+      {
+        "type": "textnode",
+        "data": [
+          {
+            "type": "variable",
+            "path": "@children"
+          }
+        ]
+      }
+    ]
+  },
+  "Link": {
+    "type": "tag",
+    "tagName": "a",
+    "attrs": [
+      {
+        "name": "href",
+        "data": [
+          {
+            "type": "variable",
+            "path": "href"
+          }
+        ]
+      },
+      {
+        "name": "class",
+        "value": "link"
+      }
+    ],
+    "children": [
+      {
+        "type": "textnode",
+        "data": [
+          {
+            "type": "variable",
+            "path": "@children"
+          }
+        ]
+      }
+    ]
+  },
+  "Template": {
+    "type": "tag",
+    "tagName": "div",
+    "attrs": [
+      {
+        "name": "id",
+        "value": "articles"
+      }
+    ],
+    "children": [
+      {
+        "type": "helper",
+        "name": "NonEmpty",
+        "attrs": [
+          {
+            "name": "data",
+            "data": [
+              {
+                "type": "variable",
+                "path": "articles"
+              }
+            ]
+          }
+        ],
+        "children": [
+          {
+            "type": "helper",
+            "name": "Repeat",
+            "attrs": [
+              {
+                "name": "data",
+                "data": [
+                  {
+                    "type": "variable",
+                    "path": "articles"
+                  }
+                ]
+              }
+            ],
+            "children": [
+              {
+                "type": "tag",
+                "tagName": "article",
+                "attrs": [
+                  {
+                    "name": "data-key",
+                    "data": [
+                      {
+                        "type": "variable",
+                        "path": "@index"
+                      }
+                    ]
+                  }
+                ],
+                "children": [
+                  {
+                    "type": "component",
+                    "name": "Heading",
+                    "attrs": [
+                      {
+                        "name": "tagName",
+                        "value": "h1"
+                      },
+                      {
+                        "name": "class",
+                        "value": "heading-small why-not"
+                      }
+                    ],
+                    "children": [
+                      {
+                        "type": "textnode",
+                        "data": [
+                          {
+                            "type": "variable",
+                            "path": "@loop.title"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tag",
+                    "tagName": "div",
+                    "attrs": [
+                      {
+                        "name": "class",
+                        "value": "meta"
+                      }
+                    ],
+                    "children": [
+                      {
+                        "type": "helper",
+                        "name": "Pass",
+                        "attrs": [
+                          {
+                            "name": "data",
+                            "data": [
+                              {
+                                "type": "variable",
+                                "path": "@index"
+                              }
+                            ]
+                          },
+                          {
+                            "name": "value",
+                            "value": "0"
+                          }
+                        ],
+                        "children": [
+                          {
+                            "type": "tag",
+                            "tagName": "small",
+                            "children": [
+                              {
+                                "type": "textnode",
+                                "value": "First"
+                              }
+                            ]
+                          },
+                          {
+                            "type": "component",
+                            "name": "Else"
+                          },
+                          {
+                            "type": "tag",
+                            "tagName": "small",
+                            "children": [
+                              {
+                                "type": "textnode",
+                                "value": "Another"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "helper",
+                        "name": "Fail",
+                        "attrs": [
+                          {
+                            "name": "data",
+                            "data": [
+                              {
+                                "type": "variable",
+                                "path": "@index"
+                              }
+                            ]
+                          },
+                          {
+                            "name": "value",
+                            "value": "2"
+                          }
+                        ],
+                        "children": [
+                          {
+                            "type": "tag",
+                            "tagName": "p",
+                            "children": [
+                              {
+                                "type": "textnode",
+                                "data": [
+                                  {
+                                    "type": "variable",
+                                    "path": "@attrs.data"
+                                  },
+                                  {
+                                    "type": "text",
+                                    "value": " not "
+                                  },
+                                  {
+                                    "type": "variable",
+                                    "path": "@attrs.value"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "helper",
+                        "name": "Range",
+                        "attrs": [
+                          {
+                            "name": "data",
+                            "data": [
+                              {
+                                "type": "variable",
+                                "path": "@index"
+                              }
+                            ]
+                          },
+                          {
+                            "name": "min",
+                            "value": "1"
+                          },
+                          {
+                            "name": "max",
+                            "value": "2"
+                          }
+                        ],
+                        "children": [
+                          {
+                            "type": "tag",
+                            "tagName": "p",
+                            "children": [
+                              {
+                                "type": "textnode",
+                                "data": [
+                                  {
+                                    "type": "variable",
+                                    "path": "@index"
+                                  },
+                                  {
+                                    "type": "text",
+                                    "value": " between "
+                                  },
+                                  {
+                                    "type": "variable",
+                                    "path": "@attrs.min"
+                                  },
+                                  {
+                                    "type": "text",
+                                    "value": " and "
+                                  },
+                                  {
+                                    "type": "variable",
+                                    "path": "@attrs.max"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tag",
+                    "tagName": "p",
+                    "children": [
+                      {
+                        "type": "textnode",
+                        "data": [
+                          {
+                            "type": "variable",
+                            "path": "@loop.contents"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "helper",
+        "name": "Empty",
+        "attrs": [
+          {
+            "name": "data",
+            "data": [
+              {
+                "type": "variable",
+                "path": "articles"
+              }
+            ]
+          }
+        ],
+        "children": [
+          {
+            "type": "tag",
+            "tagName": "p",
+            "children": [
+              {
+                "type": "textnode",
+                "value": "No Articles"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

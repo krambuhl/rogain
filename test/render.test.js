@@ -1,9 +1,13 @@
 const renderToString = require('../dist').renderToString;
 const html = require('html').prettyPrint;
+
 const config = require('./render.config.js');
+const data = require('./fixtures/data.json');
 
-var tree = require('./fixtures/template.json');
-var data = require('./fixtures/data.json');
+var output = renderToString(config.components.Template, data, config);
 
-var output = renderToString(tree, data, config);
-console.log( html(output) );
+
+console.log('');
+// console.log( html(output, { unformatted: [] }) );
+console.log(output);
+console.log('');

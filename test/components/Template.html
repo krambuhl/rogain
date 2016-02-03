@@ -1,0 +1,31 @@
+<div id="articles">
+  <NonEmpty data={articles}>
+    <Repeat data={articles}>
+      <article data-key={@index}> 
+        <Heading tagName="h1" class="heading-small why-not">{@loop.title}</Heading>
+        
+        <div class="meta">
+          <Pass data={@index} value="0">
+            <small>First</small>
+          <Else />
+            <small>Another</small>
+          </Pass>
+
+          <Fail data={@index} value="2">
+            <p>{@attrs.data} not {@attrs.value}</p>
+          </Fail>
+          
+          <Range data={@index} min="1" max="2">
+            <p>{@index} between {@attrs.min} and {@attrs.max}</p>
+          </Range>
+        </div>
+
+        <p>{@loop.contents}</p>
+      </article>
+    </Repeat>
+  </NonEmpty>
+
+  <Empty data={articles}>
+    <p>No Articles</p>
+  </Empty>
+</div>

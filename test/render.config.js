@@ -1,15 +1,8 @@
 const RogainConfig = require('../dist').Config;
 
-var config = new RogainConfig();
-
-config
-  .registerHelper('Range', require('./helpers/Range'))
-  .registerHelper('Repeat', require('./helpers/Repeat'))
-  .registerHelper('Pass', require('./helpers/Pass'))
-  .registerHelper('Fail', require('./helpers/Fail'));
-
-config
-  .registerComponent('Heading', require('./fixtures/template.json'));
-
+var config = new RogainConfig({
+  helpers: require('./helpers/helpers.js'),
+  components: require('./fixtures/templates.json')
+});
 
 module.exports = config;
