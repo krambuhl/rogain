@@ -1,8 +1,10 @@
 <div id="articles">
+  <p>First title: {articles.0.title}</p>
+
   <NonEmpty data={articles}>
     <Repeat data={articles}>
       <article data-key={@index}> 
-        <Heading tagName="h1" class="heading-small why-not">{@loop.title}</Heading>
+        <Heading tagName="h1" class="heading-small">{@loop.title|titleCase}</Heading>
         
         <div class="meta">
           <Pass data={@index} value="0">

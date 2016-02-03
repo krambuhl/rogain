@@ -61,6 +61,25 @@
     ],
     "children": [
       {
+        "type": "tag",
+        "tagName": "p",
+        "children": [
+          {
+            "type": "textnode",
+            "data": [
+              {
+                "type": "text",
+                "value": "First title: "
+              },
+              {
+                "type": "variable",
+                "path": "articles.0.title"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "type": "helper",
         "name": "NonEmpty",
         "attrs": [
@@ -115,7 +134,7 @@
                       },
                       {
                         "name": "class",
-                        "value": "heading-small why-not"
+                        "value": "heading-small"
                       }
                     ],
                     "children": [
@@ -124,7 +143,12 @@
                         "data": [
                           {
                             "type": "variable",
-                            "path": "@loop.title"
+                            "path": "@loop.title",
+                            "filters": [
+                              {
+                                "name": "titleCase"
+                              }
+                            ]
                           }
                         ]
                       }

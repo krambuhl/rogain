@@ -27,6 +27,10 @@ var config = new Rogain.Config({
     },
     components: {
         Heading: require('./components/heading.json')
+    },
+    filters: {
+        json: data => JSON.stringify(data),
+        split: (data, s) => data.split(s)
     }
 });
 ```
