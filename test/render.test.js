@@ -8,6 +8,6 @@ var output = renderToString(config.components.Template, data, config);
 
 
 console.log('');
-// console.log( html(output, { unformatted: [] }) );
-console.log(output);
+console.log( html(output, { unformatted: [] }) );
+// console.log(output);
 console.log('');
