@@ -4,7 +4,7 @@ const html = require('html').prettyPrint;
 const config = require('./render.config.js');
 const data = require('./fixtures/data.json');
 
-var output = renderToString(config.components.Template, data, config);
+var output = renderToString(config.components.get('Template'), data, config);
 
 
 console.log('');

@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/krambuhl/rogain",
   "dependencies": {
-    "htmlparser": "^1.7.7"
+    "rogain-config": "^0.1.2",
+    "rogain-parser": "^0.1.1"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",

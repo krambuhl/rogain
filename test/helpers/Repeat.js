@@ -1,5 +1,5 @@
-var createFrame = require('../../dist').createFrame;
-var createDefaultLocals = require('../../dist').createDefaultLocals;
+var createFrame = require('../../dist/utils/createFrame');
+var createDefaultLocals = require('../../dist/utils/createDefaultLocals');
 var assign = require('object-assign');
 
 module.exports = function(tree, props) {

@@ -1,4 +1,4 @@
-var splitTree = require('../../dist').splitTree;
+var splitTree = require('../../dist/tree-utils').splitTree
 
 module.exports = function(tree, props) {
   var split = splitTree(tree.children, 'component', 'Else');

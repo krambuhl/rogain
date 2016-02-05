@@ -1,4 +1,4 @@
-const RogainConfig = require('../dist').Config;
+const RogainConfig = require('rogain-config');
 
 var config = new RogainConfig({
   helpers: require('./helpers/helpers.js'),
