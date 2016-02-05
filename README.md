@@ -20,6 +20,8 @@ Rogain provides a templating language that uses case-sensitive HTML and single c
 
 ## Rogain.Config
 
+Creates a Config instance to manage components, helpers and filters use by rogain.
+
 ```js
 var config = new Rogain.Config({
     helpers: {
@@ -30,18 +32,18 @@ var config = new Rogain.Config({
     },
     filters: {
         json: data => JSON.stringify(data),
-        split: (data, s) => data.split(s)
+        split: (data, seperator) => data.split(seperator)
     }
 });
 ```
 
-Further documentation on the Config class can be found in the [Config Readme](README.config.md)
+Further documentation on the Config class can be found in the [rogain-config](https://github.com/krambuhl/rogain-config) module.
 
 
 ## Rogain.Parser
 
 ```js
-var parser = new Rogain.Parser(config.helpers);
+var parser = new Rogain.Parser(config);
 ```
 
 ### parse(template)
@@ -55,42 +57,59 @@ fs.readFile(__dirname + '/components/template.html')
   });
 ```
 
+Further documentation can be found in the [rogain-parser](https://github.com/krambuhl/rogain-parser) module.
+
 
 ## Rendering
 
 ### Rogain.renderToString(tree, data, config)
 
 ```js
-var tree = require('./components/template.json');
-var data = require('./fixtures/data.json');
+import tree from './components/template.json';
+import data from './fixtures/data.json';
 
-document.body.innerHTML = renderToString(tree, data, config);
+document.body.innerHTML = Rogain.renderToString(tree, data, config);
 ```
+
+Further documentation can be found in the [rogain-render-string](https://github.com/krambuhl/rogain-render-string) module. 
 
 
 ## Utilities
 
+Documentation can be found in the [rogain-utils](https://github.com/krambuhl/rogain-utils) module.
+
 ### createDefaultLocals(props, attrs)
 
 ```js
+import { createDefaultLocals } from 'rogain-utils';
 var locals = createDefaultLocals(props, attrs);
 ```
 
 ### createFrame(tree, locals)
 
 ```js
+import { createDefaultLocals } from 'rogain-utils';
 var frame = createFrame(rtree, locals);
 ```
 
 
 ## Tree Utilities
 
-### splitTree(trees, type, name)
+Documentation can be found in the [rogain-tree-utils](https://github.com/krambuhl/rogain-tree-utils)module.
+
+
+### splitTree(trees, match)
 
 ```js
-var branches = splitTree(tree.children, 'component', 'Else');
-var passBranch = branches[0];
-var failBranch = branches[1];
+import { splitTree } from 'rogain-tree-utils';
+
+var branches = splitTree(tree.children, {
+    type: 'component',
+    name: 'Else'
+});
+
+var passing = branches[0];
+var failing = branches[1];
 ```
 
 
