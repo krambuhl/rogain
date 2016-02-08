@@ -81,7 +81,7 @@
       },
       {
         "type": "helper",
-        "name": "NonEmpty",
+        "name": "Defined",
         "attrs": [
           {
             "name": "data",
@@ -96,7 +96,7 @@
         "children": [
           {
             "type": "helper",
-            "name": "Repeat",
+            "name": "Each",
             "attrs": [
               {
                 "name": "data",
@@ -143,12 +143,7 @@
                         "data": [
                           {
                             "type": "variable",
-                            "path": "@loop.title",
-                            "filters": [
-                              {
-                                "name": "titleCase"
-                              }
-                            ]
+                            "path": "@item.title"
                           }
                         ]
                       }
@@ -166,7 +161,7 @@
                     "children": [
                       {
                         "type": "helper",
-                        "name": "Pass",
+                        "name": "If",
                         "attrs": [
                           {
                             "name": "data",
@@ -194,7 +189,7 @@
                             ]
                           },
                           {
-                            "type": "component",
+                            "type": "helper",
                             "name": "Else"
                           },
                           {
@@ -211,7 +206,7 @@
                       },
                       {
                         "type": "helper",
-                        "name": "Fail",
+                        "name": "Unless",
                         "attrs": [
                           {
                             "name": "data",
@@ -320,9 +315,30 @@
                         "data": [
                           {
                             "type": "variable",
-                            "path": "@loop.contents"
+                            "path": "@item.contents"
                           }
                         ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "tag",
+                    "tagName": "a",
+                    "attrs": [
+                      {
+                        "name": "href",
+                        "data": [
+                          {
+                            "type": "variable",
+                            "path": "@item.href"
+                          }
+                        ]
+                      }
+                    ],
+                    "children": [
+                      {
+                        "type": "textnode",
+                        "value": "Read More"
                       }
                     ]
                   }

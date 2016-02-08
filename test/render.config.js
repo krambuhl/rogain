@@ -1,8 +1,6 @@
-const RogainConfig = require('rogain-config');
+const Config = require('rogain-config');
 
-var config = new RogainConfig({
-  helpers: require('./helpers/helpers.js'),
-  components: require('./fixtures/templates.json')
-});
+var config = new Config(require('../dist').core)
+config.components.register(require('./fixtures/templates.json'))
 
 module.exports = config;

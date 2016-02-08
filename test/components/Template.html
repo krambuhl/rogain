@@ -1,31 +1,33 @@
 <div id="articles">
   <p>First title: {articles.0.title}</p>
 
-  <NonEmpty data={articles}>
-    <Repeat data={articles}>
+  <Defined data={articles}>
+    <Each data={articles}>
       <article data-key={@index}> 
-        <Heading tagName="h1" class="heading-small">{@loop.title|titleCase}</Heading>
+        <Heading tagName="h1" class="heading-small">{@item.title}</Heading>
         
         <div class="meta">
-          <Pass data={@index} value="0">
+          <If data={@index} value="0">
             <small>First</small>
           <Else />
             <small>Another</small>
-          </Pass>
+          </If>
 
-          <Fail data={@index} value="2">
+          <Unless data={@index} value="2">
             <p>{@attrs.data} not {@attrs.value}</p>
-          </Fail>
+          </Unless>
           
           <Range data={@index} min="1" max="2">
             <p>{@index} between {@attrs.min} and {@attrs.max}</p>
           </Range>
         </div>
 
-        <p>{@loop.contents}</p>
+        <p>{@item.contents}</p>
+
+        <a href={@item.href}>Read More</a>
       </article>
-    </Repeat>
-  </NonEmpty>
+    </Each>
+  </Defined>
 
   <Empty data={articles}>
     <p>No Articles</p>

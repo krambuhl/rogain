@@ -1,7 +1,5 @@
 const Config = require('rogain-config');
 
-var config = new Config({
-  helpers: require('./helpers/helpers.js')
-});
+var config = new Config(require('../dist').core)
 
 module.exports = config;

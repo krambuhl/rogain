@@ -10,10 +10,10 @@ Rogain provides a templating language that uses case-sensitive HTML and single c
 ```html
 <div>
   <Heading tagName="h1">{title}</Heading>
-  <Repeat data={favoriteThings}>
-    <Heading tagName="h2">{@loop.title}</Heading>
-    <p>{@loop.contents}</p>
-  </Repeat>
+  <Each data={favoriteThings} as="@thing">
+    <Heading tagName="h2">{@thing.title}</Heading>
+    <p>{@thing.contents}</p>
+  </Each>
 </div>
 ```
 
@@ -30,10 +30,7 @@ var config = new Rogain.Config({
     components: {
         Heading: require('./components/heading.json')
     },
-    filters: {
-        json: data => JSON.stringify(data),
-        split: (data, seperator) => data.split(seperator)
-    }
+    filters: require('./filters')
 });
 ```
 
@@ -62,7 +59,7 @@ Further documentation can be found in the [rogain-parser](https://github.com/kra
 
 ## Rendering
 
-### Rogain.renderToString(tree, data, config)
+### renderToString(tree, data, config)
 
 ```js
 import tree from './components/template.json';
@@ -78,38 +75,8 @@ Further documentation can be found in the [rogain-render-string](https://github.
 
 Documentation can be found in the [rogain-utils](https://github.com/krambuhl/rogain-utils) module.
 
-### createDefaultLocals(props, attrs)
-
-```js
-import { createDefaultLocals } from 'rogain-utils';
-var locals = createDefaultLocals(props, attrs);
-```
-
-### createFrame(tree, locals)
-
-```js
-import { createDefaultLocals } from 'rogain-utils';
-var frame = createFrame(rtree, locals);
-```
-
 
 ## Tree Utilities
 
-Documentation can be found in the [rogain-tree-utils](https://github.com/krambuhl/rogain-tree-utils)module.
-
-
-### splitTree(trees, match)
-
-```js
-import { splitTree } from 'rogain-tree-utils';
-
-var branches = splitTree(tree.children, {
-    type: 'component',
-    name: 'Else'
-});
-
-var passing = branches[0];
-var failing = branches[1];
-```
-
+Documentation can be found in the [rogain-tree-utils](https://github.com/krambuhl/rogain-tree-utils) module.
 

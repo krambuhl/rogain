@@ -1,6 +1,6 @@
 const fs = require('fs-promise');
 const config = require('./parser.config.js');
-const Parser = require('../dist').Parser;
+const Parser = require('rogain-parser')
 
 var parser = new Parser(config);
 var components = ['Heading', 'Link', 'Template'];
