@@ -10,10 +10,14 @@ Rogain provides a templating language that uses case-sensitive HTML and single c
 ```html
 <div>
   <Heading tagName="h1">{title}</Heading>
-  <Each data={favoriteThings} as="@thing">
-    <Heading tagName="h2">{@thing.title}</Heading>
-    <p>{@thing.contents}</p>
-  </Each>
+  <ul>
+    <Each data={favoriteThings} as="@thing">
+      <li>
+        <Heading tagName="h2">{@thing.title}</Heading>
+        <p>{@thing.contents}</p>
+      </li>
+    </Each>
+  </ul>
 </div>
 ```
 
@@ -24,12 +28,8 @@ Creates a Config instance to manage components, helpers and filters use by rogai
 
 ```js
 var config = new Rogain.Config({
-    helpers: {
-        Pass: require('./helpers/pass')
-    },
-    components: {
-        Heading: require('./components/heading.json')
-    },
+    helpers: require('./helpers'),
+    components: require('./components'),
     filters: require('./filters')
 });
 ```
@@ -46,11 +46,11 @@ var parser = new Rogain.Parser(config);
 ### parse(template)
 
 ```js
-fs.readFile(__dirname + '/components/template.html')
+fs.readFile(__dirname + '/template.html')
   .then(template => parser.parse(template))
   .then(tree => {
     var output = JSON.stringify(tree)
-    return fs.writeFile(__dirname + '/components/template.json', output);
+    return fs.writeFile(__dirname + '/template.json', output);
   });
 ```
 
@@ -62,10 +62,36 @@ Further documentation can be found in the [rogain-parser](https://github.com/kra
 ### renderToString(tree, data, config)
 
 ```js
-import tree from './components/template.json';
-import data from './fixtures/data.json';
+import Template from './template.json';
 
-document.body.innerHTML = Rogain.renderToString(tree, data, config);
+document.body.innerHTML = Rogain.renderToString(Template, {
+    title: 'My Favorite Things',
+    favoriteThings: [{
+        title: 'Corn',
+        contents: 'Lorem ipsum Aute ex sed.'
+    }, {
+        title: 'Tomatoes',
+        contents: 'Lorem ipsum Aute ex sed.'
+    }]
+}, config);
+```
+
+_Output:_
+
+```html
+<div>
+  <h1 class="heading">{title}</h1>
+  <ul>
+    <li>
+      <h2 class="heading">Corn</h2>
+      <p>Lorem ipsum Aute ex sed.</p>
+    </li>
+    <li>
+      <h2 class="heading">Tomatoes</h2>
+      <p>Lorem ipsum Aute ex sed.</p>
+    </li>
+  </ul>
+</div>
 ```
 
 Further documentation can be found in the [rogain-render-string](https://github.com/krambuhl/rogain-render-string) module. 
